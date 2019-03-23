@@ -1,0 +1,911 @@
+NB remember to activate virtualenv with activate script and pip3 install from Scripts directory in terminal window from PyCharm
+
+1-3 "pip install xyz" actually working, but "python -m pip install xyz" an alternative if needed - wheel files with pip https://stackoverflow.com/q/27885397 https://pip.pypa.io/en/stable/reference/pip_wheel/
+1-6 pycharm (Jetbrains)  Ctrl-Q - cursor docs; Alt-F7 find instances; Ctrl-space complete; Ctrl-F12 navigate structure; shift-F6 rename; Tab accept/overwrite; Ctrl-W increasing select; Alt-F1 select currently edited; Ctrl-D duplicate; Ctrl-Shift-Up/Down move line up/down; Ctrl-P valid parameter list at cursor; Ctrl-Shift-Backspace move to last edit(s); Ctrl-Shift-F7 highlight instances in file - F3/Shift-F3 move through; Ctrl-Shift-V choose clipboard copy/paste; Alt-Up/Down move between methods;  Ctrl-Alt-L reformat according to PEP8 standard; Ctrl-O override base methods; 
+Run... configuration - or use default 'main'
+pastebin.com 
+GITIGNORE FOR PYCHARM/PYTHON : https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+
+*no* implicit conversion (string->number)
+is - boolean - initial 'T' True
+list (array) my_array = ['one','two']   my_array[0]  my_array[0:2]  (from 0 to 1)   my_array[0:] (from 0 to the end) my_array[:] (from the start to the end)  my_array[-2] (2 back from the end)     'one' in my_array     will evaulate to True  - dictionary, e.g. for value in my_array.values  or for key in my_array.keys
+dictionary - key/value (JSON-like) -   dictionary1 = {'name': 'PJ', 'age': str(45), 'hobby': 'walking'}   -  dictionary1['name']   dictionary2 = zip(array_keys,array_values) - zip function for i,j in zip(my_array1, my_array2)  - pop and push for dictionaries dictionary1.pop('name')
+def - all caps for Class Names MyClass  - for functions,   my_function(): - 4 space indentation - 
+
+def my_function():
+    print('This is in my function')
+
+my_function()
+print('This is not in a function')
+
+None keyword - * 
+
+def print_people(*people):
+    for person in people:
+        print('This person is', person)
+
+# check = False
+check = 10
+
+
+if not check:
+    print('\'tis false')
+elif check == 10:
+    print('check d\'equal 10')
+else if check:
+    print('\'tis actually true')
+else:
+    print('can never get here')
+
+import re   - import regular expression library  re.sub('[A-z]' '[a-z]', string)
+string = 'I am not YELLING, he said. However we knew that that was not true.'
+re.sub('[A-z]' '[a-z]', string)
+
+class MyClass:
+	property1 = 100
+	property2 = 'hello'
+    def __init__(self, property1, property2):
+
+	def getProperty1(self):
+		print(self.property1)
+
+mything = MyClass()
+mything.getProperty1()
+
+''' string literal to comment out large code block - docstring   https://www.pythonforbeginners.com/basics/python-docstrings  https://en.wikipedia.org/wiki/Docstring#Python  The docstring for a Python code object (a module, class, or function) is the first statement of that code object, immediately following the definition (the 'def' or 'class' statement). The docstring for the code object is available on that code object's __doc__ attribute and through the help function.
+"""The module's docstring"""
+
+class MyClass(object):
+    """The class's docstring"""
+
+    def my_method(self):
+        """The method's docstring"""
+
+
+    def __init__(self): like a constructor
+
+>>> import mymodule
+>>> help(mymodule)
+The module's docstring
+>>> help(mymodule.MyClass)
+The class's docstring
+
+
+3-33 classes, __init__.py (__init__.py to identify directory as containing package, inter alia)  -  from classes.myclass  (relative, local import)
+pprint - pretty print object
+
+
+
+========================================================================
+
+Other Python course https://www.udemy.com/python-complete/learn/v4/t/lecture/5754234?start=0
+(Observation only)
+6-91 pip3 install django  - django admin - startproject mynewsite - in new directory, (a) same-named directory:__init__.py (settings); settings.py (config for APPS, TEMPLATES, MIDDLEWARE); urls.py (urlpatterns: routes to views); wsgi.py (WSGI settings)  (b) manage.py - e.g. python3 ./manage.py runwebserver 12345 (run on port 12345)
+6-92 django-admin startapp myapp - create application in project, called myapp - in subdirectory with app name (e.g. myapp) will have created: myapp directory; migrations directory; __init__.py; admin.py (import and admin.site.register models); apps.py; models.py (models declared here, also imports e.g. from django.core.urlresolvers import reverse) ; tests.py; views.py;
+NB in site settings.py, add INSTALLED_APPS entry e.g. 'myapp'
+model e.g.: from django import models; class Post(models.Model):
+	title = models.CharField(max_length=255); slug = models.SlugField(max_length=255, unique=True); summary = models.CharField(max_length=300); content = models.TextField(); published = models.BooleanField(default=True); created = models.DateTimeField(auto_now_add=True); class Meta: ordering = ['-created']
+def __unicode__(self): return u'%s'% sel.title; def get_absolute_url(self): return reverse(blog.views.post,args=[self.slug]) - models appearing as view from superuser?
+and so on and on in shockingly unhelpful styles
+6-93  - python3 ./manage.py makemigrations - python3 ./manage.py migrate - https://realpython.com/django-migrations-a-primer/ - migrations from/for models
+python3 ./manage.py createsuperuser - 
+6-94 urls.py in site: import declare routes in urlpatterns e.g. url(r'^post/$', blog_views.post); views.py in app: function for each route e.g. def index(request): return HttpResponse('Hello)
+NB '^' for regex
+6-96 in html, e.g. {% for post in posts} <div><h3>{{ post.title}} </h3></div> {% endfor %}
+6-98 {% load bootstrap %} {% %} %{ %}
+
+=======================================
+
+
+https://pypi.org/project/colorama/     https://stackoverflow.com/a/23435273
+
+
+tolookup:
+Jupyter
+venv - virtual environment   https://realpython.com/python-virtual-environments-a-primer/   https://docs.python-guide.org/dev/virtualenvs/    https://docs.python.org/3/library/venv.html
+.idea  - project settings files - useful to share (3): indexLayout.xml (external folders) vcs.xml (version control) runconfigurations -   https://rider-support.jetbrains.com/hc/en-us/articles/207097529-What-is-the-idea-folder-  https://www.jetbrains.com/help/pycharm/project-and-ide-settings.html  https://www.jetbrains.com/help/idea/working-with-projects.html
+
+slice
+
+
+Anaconda navigator
+
+https://www.pythonanywhere.com/
+nano   - Ctrl-X   https://wiki.gentoo.org/wiki/Nano/Basics_Guide   Alt-6 copy   Ctrl-U paste  Ctrl-Shift-6 select
+python - version 2    python3 - version 3    Ctrl-D === EOF     Ctrl-L to clear  dir(my_variable) to get methods applicable to a variable   dir(__builtins__)   pow(x,y)   x ** y
+for loop    - also for i,j in 
+while 
+
+tuple - using parentheses() , not mutable so no appending or removing
+open()
+fileobject.read			.readlines     .close()
+.splitlines					a+ to write at end and make new 
+with open('fruit.txt', 'w') as myfile:
+    myfile.write('something')			- with will close file even if error in block of code 3-68
+
+import os    os module for file/path      dir(os) to see functions (introspection)    help(os)  to see explanations - q to quit help if line-by-line
+module - file in Lib/
+library - directory of py files in Lib/      __init__.py loads methods    folder.file
+package - 3rd party module/library        cf npm      pip3 install xyz    or pip3 install xyz or python3 -m install xyz  -  pip show xyz  -  help(xyz) maybe - docs at e.g. 
+pypi.python.org/pypi/glob2   - python -m site   -  pip3 install --upgrade --force-reinstall glob2
+
+in Pycharm, File/Settings/Project/Project Interpreter - in drop-down select the main interpreter (e.g. Python 3.7 C:\Users\peter.DESKTOP-3GCVT7E\AppData\Local\Programs\Python\Python37-32\python.exe) not the interpreter in the venv (e.g.Python 3.7 (beyondbasics) C:\Users\peter.DESKTOP-3GCVT7E\source\repos\Python\python mega course\beyondbasics\venv\Scripts\python.exe)  - selecting the main interpreter so will give access to packages loaded into the global Python path (e.g. C:\Users\peter.DESKTOP-3GCVT7E\AppData\Local\Programs\Python\Python37-32\Lib)  https://askubuntu.com/questions/684550/importing-a-python-module-works-from-command-line-but-not-from-pycharm  https://stackoverflow.com/a/19885882    http://python-notes.curiousefficiency.org/en/latest/python_concepts/import_traps.html  - symptom: no module found from IDE e.g. PyCharm but module found from terminal Python console.
+
+could be caused by Anaconda / conda installation interfering with Pycharm https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000639400/comments/360000120659
+
+https://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python/   https://packaging.python.org/guides/installing-using-pip-and-virtualenv/  - need to activate venc using /Scripts/activate.py script from command line (navigate in Pycharm , right click open in terminal and type 'activate')    (and then deactivate later)
+
+PYTHONPATH environment variable? may already be an entry in Path for User variables in System/environment variables (Windows) 
+site_packages in venv and/or Python install directories for 3rd party libs
+
+3-65 from datetime import datetime    datetime.strptime('2018:03:03:10:15', '%Y:%m:%d:%H:%M')   mytime.strftime('%Y:%m')
+
+4-78 try:
+	something()
+except ZeroDivisionError:		# ZeroDivisionError: python keyword for a particular error
+	print('an error occurred')
+
+else:
+	print('No errors')
+
+finally:
+	print('All code completed')
+
+except Exception as e:
+	raise
+
+		
+https://pyfound.blogspot.com/search/label/pypi
+https://pypi.org/search/?q=&o=-zscore&c=Programming+Language+%3A%3A+Python+%3A%3A+3
+
+5-81 import json     data = json.load(open('data.json'))
+5-85 fuzzy string matching https://www.datacamp.com/community/tutorials/fuzzy-string-python  Levenshtein distance
+import difflib            from difflib import SequenceMatcher   SequenceMatcher(None, "rainn", "rain").ratio()    from difflib import get_close_matches    
+get_close_matches('rainn', ['hope','reign','chocolate', 'rain'])   >>> ['rain', 'reign']   get_close_matches('rainn', ['hope','reign','chocolate', 'rain'], cutoff=0.8)  >>>> ['rain']   help(get_close_matches)
+
+string interpolation:
+(1) name = there; program = 'Python'; print(f'Hello {name}! This is {program}')    # https://www.programiz.com/python-programming/string-interpolation
+NB f prefix to string indicating interpolation
+
+print("%s %s" %('Hello','There',))  (deprecated?)
+
+line continuation  - \ character     - parentheses also d'facilitate breaking into multiple lines  - function parameters also can be spread over multiple lines
+semicolons can be used to put several commands on 1 line, but not recommended
+5-89 print 1 list item per line https://www.geeksforgeeks.org/print-lists-in-python-4-different-ways/  -   '\n'.join(my_list)
+a=[1,2,3,4];    print('_'.join(map(str,a)))   >>> 1_2_3_4		# int in list mapped to string
+
+
+
+
+TODO decorators - http://book.pythontips.com/en/latest/decorators.html   https://en.wikipedia.org/wiki/Decorator_pattern  https://www.udemy.com/the-python-mega-course/learn/v4/questions/6470378   https://realpython.com/inner-functions-what-are-they-good-for/   ~C# attributes?  https://stackoverflow.com/a/40389872
+TODO variadic arguments
+TODO positional argument, keyword argument
+5-89 *my_list    **my_dictionary   TODO https://codeyarns.com/2012/04/26/unpack-operator-in-python/    https://treyhunner.com/2018/10/asterisks-in-python-what-they-are-and-how-to-use-them/   splat? unpack?
+
+6-96 pandas - DataFrame to store/process structured data - pip3 install pandas - 
+In [6]: df1 = pandas.DataFrame([[2,4,6],[10,20,30]],columns = ["Mass","Age","Saturation"], index=["First","Second"])
+
+In [7]: df1
+Out[7]:
+        Mass  Age  Saturation
+First      2    4           6
+Second    10   20          30
+
+In [14]: df2=pandas.DataFrame([{"name":"John","surname":"Jones"},{"name":"Peter"}])
+
+In [15]: df2
+Out[15]:
+    name surname
+0   John   Jones
+1  Peter     NaN
+dir(df2) will show large number of methods of DataFrame
+series - 1 dimensional, labelled by 'index' (DataFrame composed of series)
+
+
+IPython -    - pip3 install ipython
+
+6-97 Jupyter notebook (can pip3 install jupyter or pip3 install notebook) - https://github.com/jupyter/notebook/issues/4467#issuecomment-471609885  - jupyter notebook    in a directory 
+new/ notebook    xz.ipynb
+H - shortcuts; Enter - new line; Ctrl+Enter - execute cell; Alt+Enter - new cell; Enter - next line; Shift+Enter - execute and move to a new cell; Esc then D,D - delete cell; A - new cell above; B - new cell below;
+command mode has line around cell - edit mode has cursor
+token needed for authentication if using IDE to connect to Jupyter server - from output of     jupyter notebook    command in terminal
+TODO https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/   http://maxmelnick.com/2016/04/19/python-beginner-tips-and-tricks.html 
+'No connection to kernel' - python -m ipykernel - https://github.com/ipython/ipython/issues/10346#issuecomment-282615313
+pip3 uninstall tornado    pip3 install tornado==5.1.1 https://github.com/jupyter/notebook/issues/2990#issuecomment-469750346   - tornado web server https://www.tornadoweb.org/en/stable/ - not based on WebServerGatewayInterface https://wsgi.readthedocs.io/en/latest/  https://en.wikipedia.org/wiki/Tornado_(web_server)
+
+import pandas; df=pandas.read_csv('supermarkets.csv'); df;  dfpj=pandas.read_json('supermarkets.json'); dfpj;
+Cell/Type/Markdown to add text 
+markdown: ** bold; __underline;  _ or* italics; ~~ strikethrough; # H1; ##H2; ` codeblock; ``` multi-line codeblock; [link text](http://tosomeurl.net); ![image alt text](http://someurl.net/someimageurl.jpg)
+
+6-101 pip3 install xlrd - for excel files
+
+
+6-98 import os; os.listdir()
+6-103 pandas.read_csv?    for help on function - e.g. to find 'sep=' parameter string for dfsemicolon=pandas.read_csv('supermarkets-commas.txt',sep=';')
+6-104 dftext=pandas.read_csv('supermarkets-commas.txt', header=None)  for no header row
+6-105 dftext.columns = ['ID','Address','City','ZIP','Country','Name','Capacity']
+6-106 index using e.g. ID field: dftext2 = dftext.set_index('ID') - NB not in-place: produces new DataFrame, does not modify existing unless inplace=True parameter used - NB if new index set, old index by default is dropped, unless drop=False parameter used 
+6-107 .loc for Label-based location, using ranges where 1st parameter is on index column - e.g. dftext2.loc['332 Hill St':'551 Alvarado St','Country':'Capacity']   https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.loc.html - NB finish location included, unlike Python slice - to obtain a single datum (scalar) dftext2.loc['332 Hill St','Name'] - dftext2.loc['332 Hill St','Name'] will give Out[33]: 'Super River' - dftext2.loc['332 Hill St','Name'] + ' is a super address' will give Out[34]: 'Super River is a super address' - also methods such as reference &c https://stackoverflow.com/a/30813223
+DataFrame.iloc[1:3,1:3] using numerical indices
+DataFrame.ix[2,2] - 0 indexed (deprecated)
+to merely list a column, DataFrame.ColumnName e.g. dftext2.Coordinates
+6-108 DataFrame.drop - NB not in-place - e.g. (with Address previously specified as an index) 
+6-109 adding a column with same value - multiply existing DataFrame.shape by a scalar e.g. dftext2['Continent']=dftext2.shape[0]*['North America'] - NB in-place operation
+modifying each value of a column e.g. dftext2['Continent']= dftext2['Country'] + ',' + dftext2['Continent']; dftext2
+DataFrame.T will transpose (rows become columns & vice versa) - e.g.    	
+3666 21st St	735 Dolores St	332 Hill St	3995 23rd St	1056 Sanchez St	551 Alvarado St
+ID	1	2	3	4	5	6
+Address	3666 21st St	735 Dolores St	332 Hill St	3995 23rd St	1056 Sanchez St	551 Alvarado St
+City	San Francisco	San Francisco	San Francisco	San Francisco	San Francisco	San Francisco
+ZIP	CA 94114	CA 94119	California 94114	CA 94114	California	CA 94114
+Country	USA	USA	USA	USA	USA	USA
+Name	 Madeira	Bready Shop	Super River	Ben's Shop	Sanchez	Richvalley
+Capacity	8	15	25	10	12	20
+Continent	USA,North America	USA,North America	USA,North America	USA,North America	USA,North America	USA,North America
+
+DataFrame.to_clipboard()
+A way to add a record (1) copy DataFrame transpose with .T, e.g. dftext2_t = dftext2.T (2) declare record with Index e.g. dftext2_t['My Address']=[7,'Somewhere','My City','my Zip','My Country','My Shop',20, 'My Continent']; dftext2_t;  (3) then inverse transpose by again using .T  e.g. dftext2 = dftext2_t.T  
+TODO: bookmarklet https://stackoverflow.com/a/44229929   Ctrl-Shift-B
+
+6-111  geopy pip3 install geopy (after activate venv script) - NB do this (from PyCharm) before trying to use geopy in the directory's Jupyter Notebook .ipynb cells
+from geopy.geocoders import ArcGIS; nom = ArcGIS(); 	# NB brackets to construct new instance
+Nominatim geocoding from Open Street Map
+to find Jupyter Notebook kernel location: https://stackoverflow.com/a/40694605 import sys; print(sys.executable); (was in c:\users\peter.desktop-3gcvt7e\appdata\local\programs\python\python37-32\python.exe - had to run from normal cmd prompt terminal - installed in global site_packages even though PyCharm venv had not been deactivated).
+
+e.g. dftext2['LongAddress']=dftext2['Address']+', '+ dftext2['City']+', '+ dftext2['ZIP']+', '+ dftext2['Country']; dftext2 # create geocodable address string 
+
+dftext2['Coordinates']=dftext2['LongAddress'].apply(nom.geocode) # new column with location.Location object of geocode result (in each row)
+dftext2.Coordinates; # all of column  dftext2.Coordinates[0].latitude  # 1 element of column
+    lambda function to apply to all column members/rows/cells (as case may be)
+
+
+TODO: Mac Certifi for SSL https://www.udemy.com/the-python-mega-course/learn/v4/questions/5846000    https://www.udemy.com/the-python-mega-course/learn/v4/questions/6534396
+
+sudo if linux!
+
+dftext2['Latitude'] = dftext2['Coordinates'].apply(lambda x: x.latitude if x != None else None); dftext2;   # unpack Location object from Coordinates field using lambda expression
+ditto for longitude
+
+7-112 Numpy (as for arrays and image matrices)
+n = numpy.arange(10) will fill 0-9 in a numpy.ndarray (n-dimensional array) as ascertained from type(ar)
+n.reshape(3,9) into 2-D array of 3 rows of 9 elements
+Python list is different from numpy array
+pip3 install opencv-python  #globally, not in venv, so as to work with Jupyter Notebook NB opencv == cv2 (in Python)
+7-114 im_g = cv2.imread('smallgrey.png', 0) # 0: greyscale 1: RBG
+array([[187, 158, 104, 121, 143],
+       [198, 125, 255, 255, 147],
+       [209, 134, 255,  97, 182]], dtype=uint8)
+im_g = cv2.imread('smallgrey.png', 0) # 0: greyscale 1: RGB/BGR (bands)
+cv2.imwrite('newsmallgrey.png',im_g)
+7-115 
+for i in im_g: # iterate through rows of 2-d numpy array using 'for'
+    print(i)
+for i in im_g.T: # iterate through columns of (transposed) 2-d numpy array using 'for'
+    print(i)
+for i in im_g.flat: will run through individual elements of n-d array row by row
+7-116  e.g. ims = numpy.hstack((im_g,numpy.array([[1,2,3],[1,2,3],[1,2,3]])))  # horizontal stack using tuple
+array([[187, 158, 104, 121, 143,   1,   2,   3],
+       [198, 125, 255, 255, 147,   1,   2,   3],
+       [209, 134, 255,  97, 182,   1,   2,   3]])
+
+e.g. ims = numpy.vstack((im_g,numpy.array([[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]])))  # vertical stack using tuple
+array([[187, 158, 104, 121, 143],
+       [198, 125, 255, 255, 147],
+       [209, 134, 255,  97, 182],
+       [  1,   2,   3,   4,   5],
+       [  1,   2,   3,   4,   5],
+       [  1,   2,   3,   4,   5]])
+
+e.g. lst = numpy.hsplit(ims,5) # horizontal split - beware splitting non-evenly split columns
+e.g. lst2 = numpy.vsplit(ims,3) # vertical split - beware splitting non-evenly split columns
+e.g. lst2[0] # to access the first array of the split matrix
+
+8-117 Folium pip3 install'd in venv   - import folium; map=folium.map; dir(folium); help(folium); help (folium.Map)  -  generate elements (markup & jscript) from Python making use of leaflet API - default OSM tiles
+8-118 map = folium.Map(location=[51,-4])
+map = folium.Map(location=[51,-4], zoom_start=4)
+map.save('Map1.html')
+NB Google map coordinates by 'What's here'
+NB OSM names in local language https://www.udemy.com/the-python-mega-course/learn/v4/questions/6150780
+NB install'd package 'script' in Atom - for running scripts - https://atom.io/packages/script  - Packages/Script/Run Script
+NB install'd plaformio-ide-terminal - + icon at bottom-left for terminal
+pip3 install'd folium globally for use with Atom
+8-119 map = folium.Map(location=[51,-4], zoom_start=4, tiles='Mapbox Bright') #tiles argument for different base map - NB coordinates in [array]
+.Marker and .CircleMarker
+# use feature group in adding markers - can add_child marker to map directly if wished
+fg = folium.FeatureGroup(name="PJ Map")
+fg.add_child(folium.Marker([50.8,-3.8], popup="Hello, I'm a marker in a feature group #1", icon=folium.Icon(color='green')))
+map.add_child(fg)
+In Jupyter Notebook  NB maps may render ok in Chrome but _not_ render in Edge - no errors seen in F12 javascript console     https://app.dominodatalab.com/u/r00sj3/crimemaps/view/examples.ipynb
+NB fg = folium.FeatureGroup(name="PJ Map")
+folium.Marker([50.8,-3.8], popup="Hello, I'm a marker in a feature group #1").add_to(fg)
+folium.Marker([50.7,-4.1], popup="Hello, I'm a marker in a feature group #2").add_to(fg)
+fg.add_to(map) 
+as per https://python-visualization.github.io/folium/quickstart.html
+TODO comment? https://www.udemy.com/the-python-mega-course/learn/v4/questions/6617760
+Jinja2 - for rendering html via templates containing Python-like code https://en.wikipedia.org/wiki/Jinja_(template_engine)
+
+8-120 - adding multiple coordinates
+for coordinates in [[50,-4],[50,-5]]:
+    folium.Marker(location=coordinates, popup="Hello, I'm a marker in a feature group #1", icon=folium.Icon(color='green')).add_to(fg)
+
+data.columns to get headers of CSV file &c when loaded into pandas.read_csv dataframe 
+
+lat = list(data['LAT'])                     # make a Python list of latitudes from CSV file data
+lon = list(data['LON'])                     # make a Python list of latitudes from CSV file data
+
+volcanoes = folium.FeatureGroup(name="volcanoes")
+for lt, ln in zip(lat, lon):     # NB zip function for multiple lists (latitude and longitude)
+    folium.Marker(location=[lt, ln], popup="Hello, I'm a marker in a volcano feature group", icon=folium.Icon(color='green')).add_to(volcanoes)  # list/array of coords
+    volcanoes.add_to(map)
+
+8-122 - popups (no callback needed)
+elev = list(data['ELEV'])
+for lt, ln, el in zip(lat, lon, elev):     # NB zip function for multiple lists (latitude and longitude)
+    folium.Marker(location=[lt, ln], popup="Hello, I'm a marker in a volcano feature group" popup=el icon=folium.Icon(color='green')).add_to(volcanoes)  # list/array of coords
+volcanoes.add_to(map)
+
+8-123 - distinct HTML on markers' popups
+html = """
+Volcano name:<br>
+<a href="https://www.google.com/search?q=%%22%s%%22" target="_blank">%s</a><br>
+Height: %s m
+"""
+
+volcanoes = folium.FeatureGroup(name="volcanoes")
+for lt, ln, el, nm in zip(lat, lon, elev, name):     # NB zip function for multiple lists (latitude and longitude)
+    iframe = folium.IFrame(html=html % (nm, nm, el), width=200, height=100)  # strings interpolated into html string's %s parameters
+    # folium.Marker(location=[lt, ln], popup ='<p><b><em>' + nm + ',</em></b></p> <p><b>' + str(el) + '</b> metres</p>', icon=folium.Icon(color='green')).add_to(volcanoes)  # list/array of coords
+    folium.Marker(location=[lt, ln], popup = folium.Popup(iframe), icon=folium.Icon(color='green')).add_to(volcanoes)  # list/array of coords
+volcanoes.add_to(map)
+
+8-124 colours of Folium marker icons e.g. different colours per value, e.g. colours per elevation Z of point X,Y
+def function at start, call this with a parameter (e.g. elevation) within loop for populating markers
+8-126 Folium.CircleMarker has fill=False, radius=10 by default
+8-127 for polygons or points or lines in JSON or GeoJSON, folium.geoJson
+8-128 e.g.   fg.add_child(folium.GeoJson(data=(open('world.json', 'r', encoding='utf-8-sig').read())))     # import polygon of states' boundaries
+8-130 use key/value from dictionary in GeoJson to depict e.g. population-per-polygon data, using lambda/anonymous function for each record (within brackets, split over several lines for clarity/PEP8 adherence)
+
+fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read(),
+style_function = lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 1e7
+else 'orange' if 1e7 <= x['properties']['POP2005'] < 2e7 else 'red'}))     # import polygon of states' boundaries
+
+https://www.udemy.com/the-python-mega-course/learn/v4/questions/3449868  - style_function w/o using lambda https://python-visualization.github.io/folium/quickstart.html#Styling-function
+TODO: cat  https://en.wikipedia.org/wiki/Cat_(Unix)
+
+8-131 Layer control - e.g. map.add_child(folium.LayerControl()) - Layers controllable are the featuregroups previously added to map
+
+9-132 Website blocker running as a process (time/date functions with website restriction) via writing, at times, lines in hosts file redirecting prohibited sites to 127.0.0.1
+9-133 C:\Windows\System32\drivers\etc\hosts or /etc/hosts
+9-134 e.g. hosts_path = r"C:\Windows\System32\drivers\etc"     # r prefix for a string literal, to avoid Win path separators as escape characters  # could alternatively have used double slash \\
+could use Task Scheduler or Cron to run a script (one possibility - but 3rd party solution: not used - could use tight while loop instead : not used - sleep for 5s instead)
+import time; time.sleep(5); # 5 second interval
+9-135 from datetime import datetime   # datetime.now() &c to get time, datetime(2019,3,19)  # YMD   datetime.now().year # etc
+e.g.     if dt(dt.now().year, dt.now().month, dt.now().day, working_hours_start) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, working_hours_finish):
+9-136 copy hosts temporarily into local directory to save admin privilege access complication
+for .... pass # skip this iteration
+writing additional lines e.g.  127.0.0.1 someblocked site.com                 into hosts
+9-137 
+
+e.g. with open(hosts_temp_path,'r+') as file:    # file pointer placed at beginning of file with r+
+ https://www.tutorialspoint.com/python/python_files_io.htm
+
+
+9-138 any() - will be True or False - https://www.programiz.com/python-programming/methods/built-in/any  
+
+e.g. # if not any(website in line for website in website_list):  # video 9-137 06:00
+will go through each website of website_list (using inner 'for' loop), and 'any' will check whether that website is in the line in the current iteration - way of checking iterable in 1 line (good for nesting loops) - all() is similar to any() but each iterated-through parameter must be 
+
+file.seek(0) and file.truncate()
+run cmd as Admin  to get permission to alter hosts after changing path back to real hosts (not temporary)
+9-139 Windows - Pythonw.exe can run .pyw files in the background on Windows - 
+Task scheduler - run with highest privileges - new Trigger: At startup, new Action: Start a program - select website_blocker.pyw - NB path in code to any files should be absolute, not local/relative as Task Scheduler paths apply - pythonw.exe should be in processes if running
+use batch/.bat file e.g.
+REM https://www.udemy.com/the-python-mega-course/learn/v4/questions/6644797
+start pythonw "C:\Users\peter.DESKTOP-3GCVT7E\source\repos\Python\python mega course\3WebsiteBlocker\website_blocker.pyw"  1>stdout.txt 2>stderr.txt
+REM https://stackoverflow.com/a/30310192 - '>' for error output
+REM https://stackoverflow.com/a/46936512 - 'start' to close terminal window
+
+9-140 Cron for Linux or Mac - add entry to cron table - 'sudo crontab -e' - e.g. @reboot python3 /home/adi/applications/website_blocker.py - NB not pyw - NB if sudo not used, a different file will be seen - use absolute paths in code
+9-141 PythonAnywhere for regular cron/python processing jobs 24-7 e.g. fetching from API, daily number crunching &c
+
+10-142 websites' markup built/served using Flask
+10-143 pip3 install Flask  - e.g.  from flask import Flask app = Flask(__name__); @app.route('/'); def home():
+    return 'Website content to be put here'
+if __name__=='__main__':
+    app.run(debug = True)
+script, if run, will serve page from http://localhost:5000/
+NB decorator - @app.route('/')
+if script run, __main__ assigned as __name__ of running , if imported script run, __name__ will be whatever is the name of the script
+
+NB underscores in Python - single underscore prefix: hint of internal variable -  single underscore suffix: means of avoiding keyword clash with variable name -  double underscore (dunder) prefix: mangled name, so if self.__thing, instead of MyClass.__thing, instead there is a _MyClass__thing member; only callable from within the class itself as self.__thing - both double underscore prefixes and sufixes: *not* mangled but  - just underscore: a temp variable, or last interpreted expression result  -  https://dbader.org/blog/meaning-of-underscores-in-python  
+
+10-144 from flask import Flask, render_template - return render_template('example.html') - template .html files must be stored in sub-directory call 'templates'
+10-145 
+e.g.             <li><a href="{{ url_for('home') }}">Home</a></li>     
+in location of child template:
+        {%block content%}
+        {%endblock%}
+url_for('whatever') is looking for ./templates/whatever.html
+
+inside top of child template file:
+{% extends "layout.html" %}		<!--  name of parent document  -->
+{% block content %}  <!-- must match parent's block location name  -->
+
+10-147 static files, e.g. CSS, in ./static folder
+
+TODO: Flask errors with raven/sentry http://flask.pocoo.org/docs/1.0/errorhandling/
+TODO: NB omnipresent class="container"  for bootstrap &c https://stackoverflow.com/a/19983896s
+<header> (NB not <head>) mostly semantic for SEO
+NB Chrome - Network tab - right-click on css file - 'Clear browser cache' - else changes in CSS may not be shown in browser
+10-148 pip3 install virtualenv (actually, installed with Pycharm)  - python -m venv virtualfolder   - install packages into virtualenv (cf activate) - 
+10-150 (1) heroku login - (2) heroku create (can give name - optional) - (3) add x3 files (a-c): 
+	(a) requirements.txt - dependencies to install in heroku for python e.g. Flask - - (i) NB pip3 freeze from within virtualenv to see packages used in app (use PyCharm activate terminal window) (ii) pip3 install gunicorn (Python HTTP server) to virtualenv (iii) pip3 freeze > requirements.txt - NB move requirements.txt to project root  
+	(b) Procfile (no extension)  
+web: gunicorn script1:app
+i.e.  web: gunicorn filename:variable name of Flask instance
+	(c) runtime.txt  
+python-3.7.2
+
+(4) heroku git:remote --app stormy-tundra-92042
+(5) git push heroku  - NB must commit all necessary files (eg Procfile, runtime.txt, requirements.txt et al) before push
+(6) heroku open to see page (or use URL stated on CLI)
+NB git config --global user.email and user.name may have to be set up if not already set up
+NB check on Python console web page for build error log, also 'heroku logs' to see info at command line
+
+
+i.e. python version  https://devcenter.heroku.com/articles/python-support#specifying-a-python-version   
+(3) git push heroku   NB will push master branch
+10-151 update website by modifying, commiting and pushing changes to heroku
+
+TODO: IDLE IDE
+TODO: multiple projects in 1 repo? https://www.quora.com/How-would-you-manage-multiple-projects-under-one-Git-repo   https://stackoverflow.com/questions/14679614/whats-the-best-practice-for-putting-multiple-projects-in-a-git-repository
+
+11-153 Tkinter - tk interface - tool kit - basic GUI framework (PyQT, wxPython more advanced)
+11-154 from tkinter import *;	# import & use many different features from tool kit
+from tkinter import *
+11-155     t1.insert(END, miles)
+
+window = Tk()   # empty window
+b1 = Button(window,text="Execute") # b1.pack()  # simple, button in centre
+b1.grid(row=0, column=0, rowspan=2)   # detailed layout, button at top-left and wide (2 columns)
+e1 = Entry(window)      # text input
+e1.grid(row=0, column=1); t1 = Text(window, height=1, width = 20); t1.grid(row=0, column=2)
+window.mainloop()
+
+
+11-155 def km_to_miles():
+    # print('Hello')
+    print(e1_value.get())
+    miles = float(e1_value.get()) * 0.62137
+    t1.insert(END, miles)
+
+
+b1 = Button(window,text="Execute", command=km_to_miles)         # NB no parentheses; # b1.pack()  # simple, button in centre; b1.grid(row=0, column=0, rowspan=2)   # detailed layout, button at top-left and wide (2 columns)
+e1_value=StringVar(); e1 = Entry(window, textvariable=e1_value)      # text input; e1.grid(row=0, column=1)
+t1 = Text(window, height=1, width = 20);t1.grid(row=0, column=2)
+
+
+11-156 Label(text="Some Property Name")
+
+TODO: PyQt, wxPython    http://zetcode.com/gui/pyqt4/
+12-158 sqlite3 for SQLite; psycopg2 for PostGreSQL
+12-159 sqlite3 built in - import sqlite3
+e.g.
+def create_table():
+    connection = sqlite3.connect('lite.db')     # connection with new or existing SQLite db
+    cursor = connection.cursor();     cursor.execute('CREATE TABLE IF NOT EXISTS store(item TEXT, quantity INTEGER, price REAL)')       # REAL/float
+    connection.commit(); connection.close()
+
+
+def insert(item, quantity, price):
+    connection = sqlite3.connect('lite.db')     # connection with new or existing SQLite db
+    cursor = connection.cursor();  # cursor.execute('INSERT INTO store VALUES (\'Kitkat\', 50, 0.80)'); sql_string = f'INSERT INTO store VALUES (\'{item}\', {quantity},{price})'
+    # print(sql_string); cursor.execute(sql_string)    # NB f prefix
+ connection.commit();  connection.close()
+
+def view():
+    connection = sqlite3.connect('lite.db')     # connection with new or existing SQLite db
+    cursor = connection.cursor();  sql_string = f'SELECT * FROM store'; # print(sql_string); cursor.execute(sql_string)    # NB f prefix
+    rows = cursor.fetchall(); connection.close(); return rows                 # return fetched data
+print(view())
+# insert('Marathon',100, 0.75)
+12-160  update and delete fairly straightforward e.g.     sql_string = f'DELETE FROM store WHERE item=\'{item}\'' # NB f prefix
+
+NB string interpolation could also be e.g.     sql_string = 'DELETE FROM store WHERE item=?', (item,) # tuple contents to correspond with question marks
+NB *args, **kwargs https://www.digitalocean.com/community/tutorials/how-to-use-args-and-kwargs-in-python-3#understanding-**kwargs  *args is used to send a non-keyworded variable length argument list to the function  **kwargs allows you to pass keyworded variable length of arguments to a function. You should use **kwargs if you want to handle named arguments in a function.   https://www.udemy.com/the-python-mega-course/learn/v4/questions/4934682
+NB returning from inner function in decorator https://realpython.com/inner-functions-what-are-they-good-for/
+e.g. def update_kwargs(**some_kwargs):       # kwargs not mandatory, the ** is important though
+    sql_string = f'UPDATE store SET quantity={some_kwargs["quantity"]}, price={some_kwargs["price"]} WHERE item=\'{some_kwargs["item"]}\'' # NB f prefix
+or    sql_string = f'UPDATE store SET quantity={some_kwargs.get("quantity", 1)}, price={some_kwargs.get("price",1)} WHERE item=\'{some_kwargs["item"]}\'' # NB f prefix
+
+12-161 PostGreSQL (Post-Ingres (db)) - install PostGreSQL on system and pip3 install psycopg2 - import psycopg2 - 
+NB PostGIS path C:\PostgreSQL\pg10
+NB precompiled python library using wheel files - downloadable.whl file with pip3 install ./pathtowheelfile.whl
+12-162 default database called 'postgres' in PostGreSQL - or create via pgAdmin - 
+NB have to start PostGreSQL server!   https://dba.stackexchange.com/q/580
+in pgAdmin Schemas/Public/Tables to see new table
+12-163 mysql.connector - pip3 install mysql-connector -  con = mysql.connector.connect(user="PJ",  password = "PJ", host="108.167.140.122", database = "some_mysql_database")
+NB connection strings vary per database type
+NB pj='pj'; pj*2 >>> 'pjpj'
+
+13-164 desktop app - executable file from python
+wrap-guide package can show 80-character column (PEP8)
+
+NB remember to activate virtualenv with activate script and pip3 install from Scripts directory in terminal window from PyCharm
+13-166 scrollbars and listboxes in Tkinter e.g.
+books_list = Listbox(window, height=6, width=35); books_list.grid(row=2, column=0, rowspan=6, columnspan=2)       # NB rowspan, columnspan
+book_list_scroll = Scrollbar(window); book_list_scroll.grid(row=1, column=2); books_list.configure(yscrollcommand=book_list_scroll.set); book_list_scroll(command=books_list.yview)
+
+13-167 1-by-1 write & check CRUD functions
+use DB Browser for SQLite to inspect .db file in root directory
+TODO: generators (pattern viz decorators) & yield
+13-168 use command=search_function and def search_function with backend.search (having import'd backend) to link frontend & backend e.g.
+def search_command():
+    books_list.delete(0, END)            # clear list box
+    for row in backend.search(title_text.get(), author_text.get(), year_text.get(), isbn_text.get()):
+        books_list.insert(END, row)
+search_entry_button = Button(window, text="Search entry", width=12, command=search_command)
+
+13-168 .bind method on listbox to get select status  - http://effbot.org/tkinterbook/listbox.htm - <<ListboxSelect>> d'return tuple of e.g. (2,) returned so get [0]
+e.g. books_list.bind('<<ListboxSelect>>',get_selected_row)
+def get_selected_row(event):     # NB event parameter, for booklist
+    global selected_row_tuple       # make available outside function - no need to use this function if no event
+    index = books_list.curselection()[0]    # get 1st part of <<ListboxSelect>> tuple (i.e. the index)
+    selected_row_tuple = books_list.get(index)
+
+def delete_command():
+    backend.delete(selected_row_tuple[0])   # get first (only?) element of selected row's tuple
+
+for close, command=window.destroy
+13-170 exercise re try...except IndexError
+13-171 standalone executables - pip3 install pyinstaller (globally) - pyinstaller --onefile --windowed mymainscriptfile.py - mymainscriptfile.exe in ./dist folder
+.pyc files, .pyo, __pycache__ directory &c - by pyinstaller, precompiled module script for speedy build to save importation if not changed since last build ('progressive?' build)  - https://stackoverflow.com/q/8822335
+TODO: .app file Mac
+
+14-174 OOP: e.g. class Database:  def __init__(self):   like a constructor, called on instantiation - 'self' is a convention, not keyword
+all methods will require (self,...) self parameter in addition to following other parameters
+NB from tkinter import *    will occupy some memory but enables declaration of objects easily e.g. Label() whereas  import tkinter   would mean having to use dot notation   tkinter.Label()  - abbreviated    import tkinter as tk  will slightly ease   tk.Label     https://www.udemy.com/the-python-mega-course/learn/v4/questions/2919100
+14-175 using OOP database class with db.connect and cursor in __init__(self) constructor will, if that .connection and .cursor are referenced in method code, remove need for connection code in methods - but NB .close() ing of db will have to be left out of __init__ (to avoid 'db closed' errors) - db.close to go in destructor __del__
+__init__(self, file, db)
+TODO cf with_connection decorator
+__del__self:     - destructor for class  -  https://pythonprogramminglanguage.com/destructor/
+
+e.g. class Account:
+    def __init__(self, filepath):
+        with open(filepath, 'r') as file:
+            self.balance = int(file.read())      # instance variable / property
+        self.filepath = filepath
+14-176 package: DIRECTORY; module: FILE; class: code  - as seen when importing from command line - 
+14-177 inheritance base class & subclass - 
+e.g. class CheckingAccount(Account):
+    def __init__(self, filepath, fee):     # self passed even if sub-class
+        Account.__init__(self, filepath)  # invoking base account
+	self.fee = fee			# NB instance variable from constructor into sub-class
+14-178 class variable declared in body of class
+e.g. type='checking-account'
+docstring under class name - with print(myinstancename.__doc__) docstring will print - useful when importing without code 
+e.g. class CheckingAccount(Account):
+	''' This class d'generate checking account objects '''  or """ This class d'generate checking account objects """
+TODO polymorphism; multiple inheritance   https://stackoverflow.com/questions/3724110/practical-example-of-polymorphism/3724160#3724160  https://www.python-course.eu/python3_multiple_inheritance.php  https://www.programiz.com/python-programming/multiple-inheritance    https://stackoverflow.com/q/3277367
+TODO super function super().__init__
+14-179 front end as class - I made database link functions as methods of a class - video solution also included 'markup' of tktinter methods in __init__
+
+15-181 Computer vision - OpenCV - cv2
+15-182 pip3 install opencv-python (in venv and globally) 
+15-183
+img = cv2.imread('galaxy.jpg', 0)      # -1 for colour   https://docs.opencv.org/3.1.0/dc/d2e/tutorial_py_image_display.html
+NB tuple unpacking    is same as height,width = img.shape
+img = cv2.imread('galaxy.jpg', -1)      # -1 for colour
+cv2.IMREAD_COLOR: 1
+cv2.IMREAD_GRAYSCALE: 0
+cv2.IMREAD_UNCHANGED: -1
+A 3-colour image will have 3 matrices
+
+NB pip3 install screeninfo  - for monitor in screeninfo.get_monitors():    width = monitor.width  - ... and scale thence:  min_ratio = min((screen_height / img_height), (screen_width / img_width)) - resized_image = cv2.resize(img, (int((img_width * min_ratio)), int((img_height * min_ratio))))
+15-184 exercise to iterate through directory and cv2.resize to 100x100 - glob2.glob used to iterate through directory - os.path.splitext(os.path.basename(file))[0] used for renamed new filename
+15-187 Haar cascade recorded in XML file (patterns of shadows &c) - e.g. face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")     # classifier object - faces = face_cascade.detectMultiScale(grey_img, scaleFactor=1.05, minNeighbours=5, )
+scale factor=1.05 : increase search size by 5% per iteration (smaller increase slower but more accuracy)
+minNeighbors=5 : reduce false positives (NB also true positives) - how many neighbours each rectange should have https://docs.opencv.org/2.4/modules/objdetect/doc/cascade_classification.html#cascadeclassifier-detectmultiscale
+
+NB detectmultiscale will return # 4 value array - bounding rectangle, from top-left
+NB https://opencv-python-tutroals.readthedocs.io/en/latest/index.html   https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html https://docs.opencv.org/2.4/modules/imgproc/doc/miscellaneous_transformations.html#cvtcolor
+
+15-188 Video capture from camera using OpenCV/cv2 - 
+NB time.sleep(3) to pause 3 seconds
+video = cv2.VideoCapture(0)     # 0 for first camera - outside a while loop
+    check, frame = video.read()     # check is boolean, frame is a numpy array
+    grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)      # dilemma - whether to call var 'grey' or 'gray' ...?
+    cv2.imshow('Capturing', grey)
+video.release()
+cv2.destroyAllWindows()
+
+
+pip3 uninstall something    pip3 install something==4.4.4   pip3 install something>4.0.0   -     print(cv2.__version__)
+?? https://github.com/opencv/opencv/issues/13255 ??
+NB np.set_printoptions(threshold=np.inf)       # print out all of numpy array  https://stackoverflow.com/q/1987694
+
+16-189 Motion detector - https://www.udemy.com/the-python-mega-course/learn/v4/questions/3696968
+16-190 Background -> (grey from colour) -> current frame -> (grey from colour) -> (difference background-current) -> convert difference to black & white using threshold -> find contours (islands) of white objects -> iterate through each of the contours, threshold by number of pixels (size) -> draw rectangle around allowed contours
+NB BGR not RGB https://stackoverflow.com/q/367449 - endian https://www.learnopencv.com/why-does-opencv-use-bgr-color-format/  "horse's ass"
+NB     _, threshold_delta = cv2.threshold(delta_frame, 100, 255, cv2.THRESH_BINARY)  same as     threshold_delta = cv2.threshold(delta_frame, 100, 255, cv2.THRESH_BINARY)[1]   # binary threshold - set to 255 if above (say, 30)
+   # binary threshold - set to 255 if above (say, 30)
+ - https://stackoverflow.com/a/55160218
+
+
+    delta_frame = cv2.absdiff(first_frame, grey)          # difference of current & first frames (blurred)
+
+    _, threshold_delta_frame = cv2.threshold(delta_frame, 100, 255, cv2.THRESH_BINARY)
+    # threshold greyscale to black & white
+    # binary threshold - set to 255 if above (say, 30)
+    # _, thresh = xyz to unpack tuple, or thresh = xyz[1]
+
+
+    threshold_delta_frame = cv2.dilate(threshold_delta_frame, None, iterations=2)     # no kernel passed in,
+    # dilate to consolidate contours
+
+	    (contours, _) = cv2.findContours(threshold_delta_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    (_, contours, _) = cv2.findContours(threshold_delta_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    # enumerate the contours in greyscaled thresholded frame
+    # retrieve external
+    # tuple returned -
+
+https://docs.opencv.org/3.4.2/d3/dc0/group__imgproc__shape.html#ga17ed9f5d79ae97bd4c7cf18403e1689a
+
+    for contour in contours:
+        if cv2.contourArea(contour) < 1000:
+            continue                    # continue back to the beginning of the loop - go no further in this loop
+        (x, y, width, height) = cv2.boundingRect(contour)      # else
+        cv2.rectangle(frame, (x, y), (x + width, y + height), (0, 255, 0) )
+        # from top left on original frame, draw 3-pixel BGR green rectangle
+
+NB continue - in loop meaning continue immediately back to next iteration/check in loop and do not process code below in loop branch
+16-191 NB extended slices https://stackoverflow.com/a/3453103   https://stackoverflow.com/a/50798932  - generator?? https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/  cf list slicing
+e.g. 
+def timepair(timelist):
+    """generator for converting a list of start-finish times into a list of pairs"""
+    for start, finish in zip(timelist[::2], timelist[1::2]):
+        yield start, finish
+    # https://stackoverflow.com/a/50798932
+
+    motion_status_list.append(motion_status)
+    if motion_status_list[-1] == 1 and motion_status_list[-2] == 0:
+        motion_times_list.append(datetime.now())
+    if motion_status_list[-1] == 1 and motion_status_list[-2] == 1:
+        motion_times_list.append(datetime.now())
+
+    if key == ord('q'):
+        if motion_status == 1:
+            motion_times_list.append(datetime.now())
+        break
+
+start_finish_list = timepair(motion_times_list)             # generate list of pairs of start/finish times - PNJ
+
+for timestamp_pair in start_finish_list:                    # write pairs of start/finish times to csv
+    df = df.append({'Start': timestamp_pair[0], 'End': timestamp_pair[1]}, ignore_index=True)
+df.to_csv('Times.csv')
+
+
+17-192  matplotlib & seaborn: older maths/charting library
+17-193 pip3 install bokeh  (after activate, as ever - but also install globally if using Jupyter Notebook)
+17-194 NB problem Edge + Jupyter Notebook
+#import Bokeh
+from bokeh.plotting import figure
+from bokeh.io import output_file, show
+import pandas
+
+#prepare some data
+x = [1,2,3,4,5]
+y = [6,7,8,9,10]
+
+#prepare the output file
+output_file('BasicLine.html')
+
+#create figure object
+fig = figure()
+
+#create line plot, using x & y arrays
+fig.line(x,y)
+
+# write the plot to html file & show
+show(fig)
+
+17-197 from csv (with header row) read_csv to pandas dataframe; then from dataframe columns (e.g. x = df['x]) to Bokeh chart series
+17-198 practice
+17-200 NB if "ModuleNotFoundError: no module named 'xlrd'" (xlrd is for ) globally pip3 install xlrd - to do with loading Excel .xslx file
+17-201 Display properties for plots e.g.
+p=figure(plot_width=500,plot_height=400, tools='pan',logo=None) 
+p.title.text="Cool Data"
+p.title.text_color="Gray"
+p.title.text_font="times"
+p.title.text_font_style="bold"
+p.title.text_font_size="36pt"
+p.xaxis.minor_tick_line_color=None
+p.yaxis.minor_tick_line_color=None
+p.xaxis.axis_label="Date"
+p.yaxis.axis_label="Intensity" 
+17-202 practice  - dataframe = pandas.read_excel('verlegenhuken.xlsx')  - fig.scatter(temperature_x, pressure_y)
+
+17-205 https://www.alphavantage.co/support/#api-key    0U1XJSQJG1EXCE3V   API key for Alpha Vantage (in lieu of functional Google/Yahoo APIs)  https://www.alphavantage.co/documentation/    
+sizing_mode=scale_both - https://bokeh.pydata.org/en/latest/docs/reference/layouts.html   - x_axis_type="datetime" to handle dates cf 7-226
+17-206 figure.quad for quadrants (areas) using arrays/dataframe-series
+17-207 Bokeh quadrants and formatting - fig = figure(x_axis_type="datetime", height=100, width=500, sizing_mode="scale_both", title="Motion Graph")
+fig.yaxis.minor_tick_line_color = None
+fig.ygrid[0].ticker.desired_num_ticks = 1
+quadrant = fig.quad(left=df['Start'], right=df['Finish'], bottom=0, top=1, color="green")
+output_file("Graph.html")
+show(fig)
+17-208 (Bokeh) HoverTool with tooltips hover = HoverTool(tooltips=[('Start: ', '@Start'), ('Finish: ', '@Finish')]);   figure.add_tools(hover)
+(Bokeh) ColumnDataSource - column_data_source = ColumnDataSource(df); - in figure(.... , source = column_data_source - will enable , e.g. '@Start'
+df['Start_string'] = df['Start'].dt.strftime("%Y-%m-%d %H:%M:%S")
+df['Finish_string'] = df['Finish'].dt.strftime("%Y-%m-%d %H:%M:%S")
+hover = HoverTool(tooltips=[('Start: ', '@Start_string'), ('Finish: ', '@Finish_string')])
+fig.add_tools(hover) #  - RuntimeError: Expected left and right to reference fields in the supplied data source.
+quadrant = fig.quad(left='Start', right='Finish', bottom=0, top=1, color="green", source=column_data_source)
+ 
+18-209 web scraping using Beautiful Soup
+18-210 ditto
+18-211 pip3 install requests    -   pip install bs4  - import requests - from bs4 import BeautifulSoup
+request = requests.get("http://pythonhow.com/example.html"); content = request.content
+TODO: is this is the same requests library as was used in Node.js ??
+request d'fetch HTML; BeautifulSoup d' extract elements/tags
+request = requests.get("http://pythonhow.com/example.html"); content = request.contentsoup = BeautifulSoup(content,'html.parser'); all = soup.find_all('div',{'class':'cities'});
+for item in all:
+    print (item.find_all('h2')[0].text)
+NB possible to pass certain parameters only e.g. soup = BeautifulSoup(c, "html.parser", parse_only=True) even though 1 parameter missed out from BeautifulSoup(markup='', features=None, builder=None, parse_only=None, from_encoding=None, exclude_encodings=None, **kwargs)
+
+19-212  https://www.udemy.com/the-python-mega-course/learn/v4/questions/3752642   - https://stackoverflow.com/a/43441551/1585017
+19-213 http://pythonhow.com/real-estate/rock-springs-wy/LCWYROCKSPRINGS/
+19-214 
+NB CTRL-Shift-J   SHIFT-M merge Jupyter notebook
+19-215  use a find_all with a for loop to iterate through multiple result elements -  use find instead of find_all if only 1 element known to be involved - e.g. for item in all:
+    print(item.find('h4',{'class':'propPrice'}).text.replace("\n",''))  # replace('/n','').replace(' ','')
+use try...except where value uncertain e.g.
+    try:
+        print(item.find('span',{'class': 'infoSqFt'}).find('b').text)  # Square Feet inside <b> as well
+    except AttributeError:
+        print(None)     # try printing None (will print as string) if data not found
+
+https://www.udemy.com/the-python-mega-course/learn/v4/questions/4671792
+19-216 zip function for efficient for loop NB find_all() in BeautifulSoup, not findall() NB *_* !
+19-217 using dictionaries to store data prior to writing to a file
+19-218 use request to crawl/load successive pages by URL 
+http://pythonhow.com/real-estate/rock-springs-wy/LCWYROCKSPRINGS/t=0&s=0.html
+NB could crawl page then check for presence of 'Next' button to see whether to continue
+base_url = 'http://pythonhow.com/real-estate/rock-springs-wy/LCWYROCKSPRINGS/t=0&s='
+for page in range (0,30,10):		# go from 0 to 30 in intervals of 10
+    print(base_url + str(page) + '.html')    
+    request = requests.get(base_url + str(page) + '.html')
+    content = request.content
+    soup = BeautifulSoup(content,'html.parser')
+    print(soup)
+NB can find element holding final number of pages and use that to calculate value x of for page in range(0, x, 10)
+
+20-219 financial data web chart app cf also sections 10- & 17-
+20-220 pip3 install pandas_datareader   https://pandas-datareader.readthedocs.io/en/latest/remote_data.html
+API fixes (A) or (B) - 
+A) https://www.udemy.com/the-python-mega-course/learn/v4/questions/4201842  1. import pandas_datareader.data as web
+2. df = web.DataReader('AAPL', 'iex', '2018-01-01', '2018-03-31') You'll get an output like '2y' or '1y'. Print that dataframe in the next line to get the dataframe. 3. print(df)  - Limitation - Only previous 5 years' stock data of any company is available..
+
+B) https://www.udemy.com/the-python-mega-course/learn/v4/questions/5968370  1. pip install fix_yahoo_finance 2.  import fix_yahoo_finance as fyf 3. fyf.pdr_override()  4. Add override before DataReader.        https://pypi.org/project/fix-yahoo-finance/
+e.g. from pandas_datareader import data; import datetime;import fix_yahoo_finance as fyf;fyf.pdr_override();start = datetime.datetime(2016, 1, 1);end = datetime.datetime(2016, 3, 10);df = data.DataReader(name="GOOG", data_source="yahoo", start=start, end=end);df
+
+e.g. 
+A) dfIEX = data.DataReader(name='MSI', data_source='iex', start=start, end=finish)
+B) fyf.pdr_override(); dfYAH = data.DataReader(name='MSI', data_source='yahoo', start=start, end=finish)
+
+
+TODO: FRED, Fama/French, World Bank &c - look up https://pandas-datareader.readthedocs.io/en/latest/remote_data.html
+20-221 financial data columns explanation  *** blocks: open/close, lines:low/high (trading)  ***
+70-222 candlestick chart explanation - blocks: open/close, lines:low/high (trading)
+70-223  # exploratory test for 'closing higher than open' values
+dfYAH.index[dfYAH.Close > dfYAH.Open]
+# DataFrame.Index to get whichever is the index
+# DataFrame.SomeColumnName to get that column
+# necessary for building candelestick graph using quadrants/rectangles
+NB DateTimeIndex not datetime so graph at start of UNIX epoch - had to: import pandas; x = pandas.to_datetime(dfYAH.index[dfYAH.Close > dfYAH.Open])   # 7-224 https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html
+
+x = pandas.to_datetime(dfYAH.index[dfYAH.Close > dfYAH.Open])   # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html
+y = (dfYAH.Open + dfYAH.Close)/2
+width = hours_12
+height = abs(dfYAH.Open - dfYAH.Close)
+# fill color GREEN if price went down through day    
+fig.rect(x=x, y=y, width=width, height=height, fill_color='green', line_color='black')    # x,y,width, height
+
+x = pandas.to_datetime(dfYAH.index[dfYAH.Close < dfYAH.Open])   # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html
+y = (dfYAH.Open + dfYAH.Close)/2
+width = hours_12
+height = abs(dfYAH.Open - dfYAH.Close)
+# fill color RED if price went down through day    
+fig.rect(x=x, y=y, width=width, height=height, fill_color='red', line_color='black')    # x,y,width, height
+
+
+
+BokehUserWarning: ColumnDataSource's columns must be of the same length. Current lengths: ('x', 6), ('y', 8)
+BokehUserWarning: ColumnDataSource's columns must be of the same length. Current lengths: ('height', 8), ('x', 6), ('y', 8)
+BokehUserWarning: ColumnDataSource's columns must be of the same length. Current lengths: ('x', 2), ('y', 8)
+BokehUserWarning: ColumnDataSource's columns must be of the same length. Current lengths: ('height', 8), ('x', 2), ('y', 8)
+
+def increase_decrease(close, open):
+    if close > open:
+        value = 'Increase'
+    elif close < open:
+        value = 'Decrease'
+    else:
+        value = 'Equal'
+    return value
+
+... but, instead, add column to dataframe showing increase/decrease in price status ...
+
+dfYAH['Status'] = [increase_decrease(close, open) for close, open, in zip(dfYAH.Close, dfYAH.Open)]
+# what pattern is this??
+dfYAHOO['BlockMiddle'] = (dfYAHOO.Open + dfYAHOO.Close)/2
+dfYAHOO['Height'] = abs(dfYAHOO.Close - dfYAHOO.Open)
+dfYAHOO
+
+x = pandas.to_datetime(dfYAHOO.index[dfYAHOO.Status == 'Increase'])   # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html
+y = dfYAHOO.BlockMiddle[dfYAHOO.Status == 'Increase']
+width = hours_12
+height = dfYAHOO.Height[dfYAHOO.Status == 'Increase']
+# fill color GREEN if price went down through day    
+fig.rect(x=x, y=y, width=width, height=height, fill_color='green', line_color='black')    # x,y,width, height
+
+x = pandas.to_datetime(dfYAHOO.index[dfYAHOO.Status == 'Decrease'])   # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html
+y = dfYAHOO.BlockMiddle[dfYAHOO.Status == 'Decrease']
+width = hours_12
+height = dfYAHOO.Height[dfYAHOO.Status == 'Decrease']
+# fill color RED if price went down through day    
+fig.rect(x=x, y=y, width=width, height=height, fill_color='red', line_color='black')    # x,y,width, height
+
+
+70-225 fig.grid.grid_line_alpha = 0.3  - some transparency for grid lines (not so stark)
+fig.segment(pandas.to_datetime(dfYAHOO.index), dfYAHOO.High, pandas.to_datetime(dfYAHOO.index), dfYAHOO.Low, color='black') 
+# draw lines for daily price high and low (rectangle of width=0)
+# x,y (low), x,y (high), colour - NB index field is 'Date'
+# NB had to use pandas.to_datetime again
+
+NB features e.g. segments, rects layered in order of code so change order in code to affect order on drawing (e.g. segments i.e. lines behind solid blocks)
+
+70-226 styling, e.g. colour  -    sizing_mode="stretch_both"; # for responsive    cf 17-205
+7-227 Prep for embedding Bokeh into Flask web site 
+(1-4 necessary things to embed Bokeh into Flask site) 1) javascript 2) div code for bokeh chart class=bk-canvas-events 3) css links  4) js links
+(3) <link href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
+(4) <script src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js" type="text/javascript"></script>
+(4) <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+
+output_file and show not needed to embed Bokeh into Flask - from bokeh.embed import components;  ....   my_script, my_div = components(my_figure)   - (returns tuple) 
+my_script d'contain (3 & 4) ; my_div d'contain (1 & 2)
+from bokeh.resources import CDN   # yes, that sort of CDN Content Delivery Network - cf url in <head> link tags   - cdn_javascript = CDN.js_files # (4) - a list of links to Bokeh js;  cdn_css = CDN.css_files (3) - a list of links to Bokeh css; 
+e.g. print(cdn_javascript)
+['https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js', 'https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js', 'https://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.js', 'https://cdn.pydata.org/bokeh/release/bokeh-gl-1.0.4.min.js']
+70-228 NB I didn't set up a virtual environment manually while using Jupyter Notebook as (1) Jupyter Notebook's Python interpreter used the global interpreter not any venv. (2) Pycharm is good for venv setup and I didn't use Pycharm for Jupyter Notebook. 
+https://docs.python.org/3/library/venv.html
+-----------------------------------------------
+
+
+monotonous (little change in pitch, words run together)
+vowel sounds similar
+too quick in important bits, some repetition/time wasting in discussion though good explanation of need-to-know, few diagrams but good
+lots of sighing
+lots of talking without diagrams eg 20-224 - the grid sketch of the form in section 13 was good
+
+pandas (pannas)
+ahead (ahud)
+commAnd (commond)
+last (lost)
+country (contry)
+indexing (innexing)
+python (poython)
+not (noh)
+my (moy)
+convert (covert)
+extract (extrot)
+comma (coma)
+mmmmm
+
+then (theh)
+so you get (syiget)
+column (com)
+csv (seesvee)
+web scraping (web scrapping)
