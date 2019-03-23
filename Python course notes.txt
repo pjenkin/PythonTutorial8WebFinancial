@@ -796,8 +796,8 @@ B) fyf.pdr_override(); dfYAH = data.DataReader(name='MSI', data_source='yahoo', 
 
 TODO: FRED, Fama/French, World Bank &c - look up https://pandas-datareader.readthedocs.io/en/latest/remote_data.html
 20-221 financial data columns explanation  *** blocks: open/close, lines:low/high (trading)  ***
-70-222 candlestick chart explanation - blocks: open/close, lines:low/high (trading)
-70-223  # exploratory test for 'closing higher than open' values
+20-222 candlestick chart explanation - blocks: open/close, lines:low/high (trading)
+20-223  # exploratory test for 'closing higher than open' values
 dfYAH.index[dfYAH.Close > dfYAH.Open]
 # DataFrame.Index to get whichever is the index
 # DataFrame.SomeColumnName to get that column
@@ -865,8 +865,8 @@ fig.segment(pandas.to_datetime(dfYAHOO.index), dfYAHOO.High, pandas.to_datetime(
 
 NB features e.g. segments, rects layered in order of code so change order in code to affect order on drawing (e.g. segments i.e. lines behind solid blocks)
 
-70-226 styling, e.g. colour  -    sizing_mode="stretch_both"; # for responsive    cf 17-205
-7-227 Prep for embedding Bokeh into Flask web site 
+20-226 styling, e.g. colour  -    sizing_mode="stretch_both"; # for responsive    cf 17-205
+20-227 Prep for embedding Bokeh into Flask web site 
 (1-4 necessary things to embed Bokeh into Flask site) 1) javascript 2) div code for bokeh chart class=bk-canvas-events 3) css links  4) js links
 (3) <link href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
 (4) <script src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js" type="text/javascript"></script>
@@ -880,7 +880,41 @@ from bokeh.resources import CDN   # yes, that sort of CDN Content Delivery Netwo
 e.g. print(cdn_javascript)
 ['https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js', 'https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js', 'https://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.js', 'https://cdn.pydata.org/bokeh/release/bokeh-gl-1.0.4.min.js']
 70-228 NB I didn't set up a virtual environment manually while using Jupyter Notebook as (1) Jupyter Notebook's Python interpreter used the global interpreter not any venv. (2) Pycharm is good for venv setup and I didn't use Pycharm for Jupyter Notebook. 
-https://docs.python.org/3/library/venv.html
+pip3 install virtualenv # if necessary
+https://docs.python.org/3/library/venv.html  - on Win: c:\>python -m venv c:\path\to\myenv - for me: c:\>python -m venv C:\Users\peter.DESKTOP-3GCVT7E\source\repos\Python\python mega course\8WebFinancial  (took c 60 seconds) - in newly-venv-made ./mega directory were Include, Lib and Scripts beside existing code - cd'd into mega\Scripts   and ran activate.bat (no explicit response on command line) - from that path, did a pip3 install of all packages at top of script (e.g. pip3 install pandas & pandas_datareader & fix_yahoo_finance & datetime & bokeh)
+
+pip3 install ditto on Flask venv 
+in Flask web script e.g. script1. py, at top of routes, add e.g.
+# route for Bokeh embedded chart
+@app.route('/plot/')
+def plot():
+    print('Hello from plot')
+    # all Bokeh code from Jupyter Notebook will go here
+
+merge any Jupyter Notebook cells involved, check output and copy/paste to function def under route declaration
+
+and   add:
+
+e.g. return render_template('plot.html', script1=script1, div1=div1, cdn_css=cdn_css, cdn_javascript=cdn_javascript)
+ maybe     
+script1, div1 = components(fig)	# get not list, but first item of CDN resources list
+cdn_javascript = CDN.js_files[0]
+cdn_css = CDN.css_files[0]
+
+copy/paste/duplicate a Flask template .html file (e.g. about.html to plot.html)
+in new html file, e.g.
+{{my_script | safe}}
+{{my_div | safe}}
+
+and early on in template after {% extends .....   - (checking variable names to match those in script pasted into def)
+
+<link rel="stylesheet" href={{cdn_css |safe}} type="text/css" />
+<script type="text/javascript" src={{cdn_javascript |safe}}></script>
+
+see 4FlaskWebsite repo for 20-228 et seq
+
+
+
 -----------------------------------------------
 
 
