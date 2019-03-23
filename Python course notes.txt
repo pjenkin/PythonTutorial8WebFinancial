@@ -913,7 +913,18 @@ and early on in template after {% extends .....   - (checking variable names to 
 
 see 4FlaskWebsite repo for 20-228 et seq
 
+20-229 Heroku prep (cf 10-150) pip3 install gunicorn - in Flask root folder, (1) pip3 freeze > requirements.txt (2) Procfile (no extension) (if not already)  
+web: gunicorn script1:app
+(3) runtime.txt (with python interpreter number)
+git commit
 
+heroku git:remote --app stormy-tundra-92042   (e.g.)
+git push heroku
+heroku open
+heroku logs       -  to see clues why things all scat up
+
+heroku create     -  if 5 apps already   - Reached maximum 5 apps in Heroku --- can't go further : You've reached the limit of 5 apps for unverified accounts. Delete some apps or add a credit card to
+ !    verify your account.
 
 -----------------------------------------------
 
